@@ -1,16 +1,51 @@
 doctype html
 html(lang="en")
   head
-    title Welcome to Pug Starter
+    title Square javascript exercise for beginners
     meta(content="Simple pug (jade) starter aimed to quickly deliver HTML & CSS projects" name="description")
-    //- this checks to see the the "embed" property is set to "true"
-    //- in the package.json file
-    if config.entry.css.embed
-      link(rel="stylesheet" href=`${embedPath}` embed)
+    style.
+      * {box-sizing: border-box}
   body
-    .content
-      include _component/intro/intro
-    //- The style.css is at the bottom so it doesn't
-    //- block the loading of assets
-    if config.entry.css.external
-      link(rel="stylesheet", href=`${baseUrl}style.css`)
+    script.
+
+      // select body
+      const body = document.body
+
+      // create a big square
+      const bigSquare = document.createElement('div')
+      bigSquare.style.border = '1px solid red'
+      bigSquare.style.width = '600px'
+      bigSquare.style.height = '600px'
+      bigSquare.style.position = 'relative'
+      let text = 'x';
+
+      const faLPeDraqAlaDePatrat = n => {
+        //- console.log(Math.floor(n / 3))
+        console.log( n % 3 )
+        const smallSquare = document.createElement('div')
+        smallSquare.style.border = '2px solid green'
+        smallSquare.style.width = '200px'
+        smallSquare.style.height = '200px'
+        smallSquare.style.position = 'absolute'
+        smallSquare.style.top = (200 * Math.floor(n / 3)) + 'px'
+        smallSquare.style.left = (200 * (n % 3)) + 'px'
+        smallSquare.style.display = 'flex'
+        smallSquare.style.justifyContent = 'center';
+        smallSquare.style.alignItems = 'center'
+        smallSquare.innerText = text;
+        text = text === 'x' ? '0' : 'x'
+        bigSquare.appendChild(smallSquare)
+      }
+
+      new Array(9)
+        .fill('bogdan')
+        .map((e, k) => {
+          faLPeDraqAlaDePatrat(k)
+        })
+      
+
+
+      body.appendChild(bigSquare)
+
+      //- console.log(bigSquare)
+
